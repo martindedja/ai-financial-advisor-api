@@ -1,5 +1,5 @@
 CREATE TABLE Users (
-    id INT PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     name VARCHAR(255),
     email VARCHAR(255),
     password_hash VARCHAR(255),
@@ -8,97 +8,86 @@ CREATE TABLE Users (
 );
 
 CREATE TABLE Income (
-    id INT PRIMARY KEY,
-    user_id INT,
+    id SERIAL PRIMARY KEY,
+    user_id INT REFERENCES Users(id),
     source VARCHAR(255),
     amount DECIMAL(10, 2),
-    frequency VARCHAR(255),
-    FOREIGN KEY (user_id) REFERENCES Users(id)
+    frequency VARCHAR(255)
 );
 
 CREATE TABLE Expenses (
-    id INT PRIMARY KEY,
-    user_id INT,
+    id SERIAL PRIMARY KEY,
+    user_id INT REFERENCES Users(id),
     category VARCHAR(255),
     amount DECIMAL(10, 2),
-    frequency VARCHAR(255),
-    FOREIGN KEY (user_id) REFERENCES Users(id)
+    frequency VARCHAR(255)
 );
 
 CREATE TABLE Investments (
-    id INT PRIMARY KEY,
-    user_id INT,
+    id SERIAL PRIMARY KEY,
+    user_id INT REFERENCES Users(id),
     type VARCHAR(255),
     amount DECIMAL(10, 2),
-    risk_level INT,
-    FOREIGN KEY (user_id) REFERENCES Users(id)
+    risk_level INT
 );
 
 CREATE TABLE RetirementAccounts (
-    id INT PRIMARY KEY,
-    user_id INT,
+    id SERIAL PRIMARY KEY,
+    user_id INT REFERENCES Users(id),
     account_type VARCHAR(255),
     balance DECIMAL(10, 2),
-    contribution DECIMAL(10, 2),
-    FOREIGN KEY (user_id) REFERENCES Users(id)
+    contribution DECIMAL(10, 2)
 );
 
 CREATE TABLE Debts (
-    id INT PRIMARY KEY,
-    user_id INT,
+    id SERIAL PRIMARY KEY,
+    user_id INT REFERENCES Users(id),
     type VARCHAR(255),
     amount DECIMAL(10, 2),
-    interest_rate DECIMAL(5, 2),
-    FOREIGN KEY (user_id) REFERENCES Users(id)
+    interest_rate DECIMAL(5, 2)
 );
 
 CREATE TABLE TaxInformation (
-    id INT PRIMARY KEY,
-    user_id INT,
+    id SERIAL PRIMARY KEY,
+    user_id INT REFERENCES Users(id),
     taxable_income DECIMAL(10, 2),
     deductions DECIMAL(10, 2),
-    credits DECIMAL(10, 2),
-    FOREIGN KEY (user_id) REFERENCES Users(id)
+    credits DECIMAL(10, 2)
 );
 
 CREATE TABLE CreditScore (
-    id INT PRIMARY KEY,
-    user_id INT,
+    id SERIAL PRIMARY KEY,
+    user_id INT REFERENCES Users(id),
     score INT,
-    date_updated DATE,
-    FOREIGN KEY (user_id) REFERENCES Users(id)
+    date_updated DATE
 );
 
 CREATE TABLE EducationalContent (
-    id INT PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     topic VARCHAR(255),
     content TEXT,
-    personalized_for INT,
-    FOREIGN KEY (personalized_for) REFERENCES Users(id)
+    personalized_for INT REFERENCES Users(id)
 );
 
 CREATE TABLE ChatbotLogs (
-    id INT PRIMARY KEY,
-    user_id INT,
+    id SERIAL PRIMARY KEY,
+    user_id INT REFERENCES Users(id),
     query TEXT,
     response TEXT,
-    timestamp TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES Users(id)
+    timestamp TIMESTAMP
 );
 
 CREATE TABLE Notifications (
-    id INT PRIMARY KEY,
-    user_id INT,
+    id SERIAL PRIMARY KEY,
+    user_id INT REFERENCES Users(id),
     type VARCHAR(255),
     message TEXT,
-    date_sent TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES Users(id)
+    date_sent TIMESTAMP
 );
 
 CREATE TABLE APIIntegrations (
-    id INT PRIMARY KEY,
-    user_id INT,
+    id SERIAL PRIMARY KEY,
+    user_id INT REFERENCES Users(id),
     service_name VARCHAR(255),
-    access_token VARCHAR(255),
-    FOREIGN KEY (user_id) REFERENCES Users(id)
+    access_token VARCHAR(255)
 );
