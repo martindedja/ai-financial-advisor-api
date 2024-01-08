@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_08_003846) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_08_035639) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -70,6 +70,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_08_003846) do
     t.bigint "category_id"
     t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.datetime "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.string "description"
+    t.date "date"
+    t.string "payment_method"
     t.index ["category_id"], name: "index_expenses_on_category_id"
   end
 
@@ -80,6 +83,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_08_003846) do
     t.string "frequency", limit: 255
     t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.datetime "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.date "date"
   end
 
   create_table "investments", id: :serial, force: :cascade do |t|
