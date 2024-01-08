@@ -1,6 +1,7 @@
 require 'jwt'
 
-class SessionsController < ApplicationController
+module Api
+  class SessionsController < ApplicationController
   
     def create
       @user = User.find_by(email: params[:email].downcase)
@@ -13,3 +14,4 @@ class SessionsController < ApplicationController
       end
     end
   end
+end
