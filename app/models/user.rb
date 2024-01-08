@@ -1,6 +1,6 @@
 class User < ApplicationRecord
     has_secure_password
-    has_many :expenses
+    has_many :expenses, dependent: :destroy
     has_many :incomes
     validates :email, presence: true, uniqueness: true
 end
