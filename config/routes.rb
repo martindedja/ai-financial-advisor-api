@@ -12,10 +12,22 @@ Rails.application.routes.draw do
     # User routes
     post "register", to: "users#create"
     get "users/:id", to: "users#show"
+
+    # resources :expenses
+
+    #expense routes
+    get "expenses", to: "expenses#index"
+    post "expenses", to: "expenses#create"
+    get "expenses/:id", to: "expenses#show"
+    put "expenses/:id", to: "expenses#update"
+    delete "expenses/:id", to: "expenses#destroy"
     
-    resources :expenses
-    
+
+        
   end
+
+  
+
 
 
   # Defines the root path route ("/")
